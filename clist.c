@@ -1,34 +1,64 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include <stdbool.h>
 
-#define MaxSize 50
-#define ElemtType int
-typedef struct clist
+#define DataType int
+
+//顺序表数据结构
+typedef struct node
 {
-    ElemtType data[MaxSize];
-    int length;
-} SeqList;
+    Node *next;
+    DataType data;
+} Node, *Linklist;
 
-bool ListInsert(SeqList *L, int i, ElemtType e)
+Linklist InitLinklist()
 {
-    if (i < 1 || i > L->length + 1)
-        return false;
-
-    if (L->length >= MaxSize)
-        return false;
-
-    for (int j = L->length; j >= i; j--)
-        L->data[j] = L->data[j - 1];
-
-    L->data[i - 1] = e;
-    L->length++;
-    return true;
+    Linklist head;
+    head = malloc(sizeof(Node));
+    head->next = NULL;
+    return head;
 }
 
-int main()
+int GetLength(Linklist head)
 {
-    printf("%s \n","main fun");
-    return 0;
+    int cnt = 0;
+    Node *p;
+    p = head->next;
+    while (p != NULL)
+    {
+        p = p->next;
+        cnt++;
+    }
 
+    return cnt;
+}
+
+void Insert(Linklist head, DataType x, int i)
+{
+    Node *p;
+    p = head->next;
+    int pos = 0;
+    if (i == 1)
+    {
+        }
+}
+
+int GetPos(Linklist head, DataType x)
+{
+    int i = 0;
+    Node *p;
+    p = head->next;
+    while (p->data != x && p->next != NULL)
+    {
+        p = p->next;
+        i++;
+    }
+    if (p->data != x)
+    {
+    }
+}
+
+void Delete(Linklist head, DataType x)
+{
+    Node *p;
+    p = head->next;
 }
