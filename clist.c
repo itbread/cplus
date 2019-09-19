@@ -26,10 +26,10 @@ void NodePrint(Linklist head)
     p = head->next;
     while (p != NULL)
     {
-        p = p->next;
         printf("%d=%d ", i++, p->data);
+        p = p->next;
     }
-    printf("%==============\n");
+    printf("\n==============\n");
 }
 
 int GetLength(Linklist head)
@@ -49,20 +49,19 @@ int GetLength(Linklist head)
 void Insert(Linklist head, DataType x, int i)
 {
     Node *p, *q;
-    p = head->next;
-    int pos = 0;
+    if (i == 1)
+        q = head;
+    else
+        q = GetNode(head, i - 1);
 
-    while (pos < i && p != NULL)
+    if (q == NULL)
+        printf("not found \n");
+    else
     {
-        p = p->next;
-        pos++;
-    }
-    if (p != NULL && p->next != NULL)
-    {
-        q = malloc(sizeof(Node));
-        q->data = x;
-        q->next = p->next;
-        p->next = q;
+        p = malloc(sizeof(Node));
+        p->data = x;
+        p->next = q->next;
+        q->next = p;
         printf("Insert success\n");
     }
 }
@@ -88,21 +87,18 @@ int GetPos(Linklist head, DataType x)
 
 int GetNode(Linklist head, int i)
 {
-    int cnt = 0;
+    int cnt = 1;
     Node *p;
     p = head->next;
-    while (p != NULL && p->next != NULL && cnt < i)
+    while (p != NULL && cnt < i)
     {
         p = p->next;
         cnt++;
     }
-    if (cnt < i)
-    {
-        printf("not found\n");
+    if (cnt == i)
+        return p;
+    else
         return NULL;
-    }
-
-    return p;
 }
 
 void Delete(Linklist head, DataType x)
@@ -130,5 +126,8 @@ int main()
     Linklist list = InitLinklist();
     NodePrint(list);
     Insert(list, 1, 1);
+    Insert(list, 2, 1);
+    Insert(list, 3, 2);
+    NodePrint(list);
     return 0;
 }
