@@ -10,6 +10,8 @@ typedef struct node
     DataType data;
 } Node, *Linklist;
 
+Node *GetNode(Linklist head, int i);
+
 Linklist InitLinklist()
 {
     Linklist head;
@@ -22,11 +24,11 @@ Linklist InitLinklist()
 void NodePrint(Linklist head)
 {
     Node *p;
-    int i = 0;
+    int i = 1;
     p = head->next;
     while (p != NULL)
     {
-        printf("%d=%d ", i++, p->data);
+        printf("index%d=%d ", i++, p->data);
         p = p->next;
     }
     printf("\n==============\n");
@@ -55,7 +57,7 @@ void Insert(Linklist head, DataType x, int i)
         q = GetNode(head, i - 1);
 
     if (q == NULL)
-        printf("not found \n");
+        printf("not found node\n");
     else
     {
         p = malloc(sizeof(Node));
@@ -85,7 +87,7 @@ int GetPos(Linklist head, DataType x)
     return 0;
 }
 
-int GetNode(Linklist head, int i)
+Node *GetNode(Linklist head, int i)
 {
     int cnt = 1;
     Node *p;
@@ -95,6 +97,7 @@ int GetNode(Linklist head, int i)
         p = p->next;
         cnt++;
     }
+    printf("cnt=%d i=%d\n", cnt, i);
     if (cnt == i)
         return p;
     else
@@ -125,9 +128,10 @@ int main()
 {
     Linklist list = InitLinklist();
     NodePrint(list);
-    Insert(list, 1, 1);
     Insert(list, 2, 1);
-    Insert(list, 3, 2);
+    NodePrint(list);
+    Insert(list, 4, 2);
+    Insert(list, 6, 3);
     NodePrint(list);
     return 0;
 }
