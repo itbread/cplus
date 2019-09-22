@@ -114,6 +114,7 @@ void DeleteLinkList(LinkList head, int i)
     }
 }
 
+//remove duplicate data
 void PurgeLinkList(LinkList head)
 {
     Node *p, *q, *r;
