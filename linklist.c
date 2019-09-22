@@ -5,7 +5,7 @@
 
 typedef struct node
 {
-    struct Node *next;
+    struct node *next;
     DataType data;
 } Node, *LinkList;
 
@@ -114,6 +114,33 @@ void DeleteLinkList(LinkList head, int i)
     }
 }
 
+void PurgeLinkList(LinkList head)
+{
+    Node *p, *q, *r;
+    q = head->next;
+    int i=0;
+    while (q != NULL)
+    {
+        p = q;
+         i=1;
+        while (p->next != NULL)
+        {
+            if (p->next->data == q->data)
+            {
+                printf("del %d =%d \n",q->data,i++);
+                r = p->next;
+                p->next = r->next;
+                free(r);
+            }
+            else
+            {
+                p = p->next;
+            }
+        }
+        q = q->next;
+    }
+}
+
 LinkList CreateLinkList()
 {
     LinkList head;
@@ -176,7 +203,8 @@ int main()
     // PrintLinkList(head);
     // LinkList head2=CreateLinkList2();
     // PrintLinkList(head2);
-    LinkList head3=CreateLinkList2();
+    LinkList head3 = CreateLinkList2();
     PrintLinkList(head3);
+    PurgeLinkList(head3);
     return 0;
 }
