@@ -123,7 +123,7 @@ void Delete(Linklist head, DataType x)
         p = p->next;
     }
 }
-
+//comment
 int main()
 {
     Linklist list = InitLinklist();
